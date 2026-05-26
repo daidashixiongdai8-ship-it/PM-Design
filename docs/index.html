@@ -93,14 +93,11 @@
             font-size: 13px; font-weight: 500; color: var(--accent);
         }
         .image-slot .preview {
-            width: 100%; padding-bottom: 72%;
+            width: 100%;
             background: linear-gradient(135deg, #E8E5E0 0%, #F0EDE8 50%, #E0DDD6 100%);
             display: flex; align-items: center; justify-content: center;
-            color: var(--text-secondary); font-size: 13px;
-            transition: background 0.2s;
         }
-        .image-slot .preview img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
-        .image-slot .preview { position: relative; }
+        .image-slot .preview img { width: 100%; height: auto; display: block; }
         .image-slot .hint {
             font-size: 12px; color: var(--text-secondary);
         }
@@ -179,27 +176,23 @@
         <div class="image-grid">
             <div class="image-slot">
                 <div class="label">入睡页 · 夜间模式</div>
-                <div class="preview"><span class="hint">📱 夜间 — 点击"开始入睡"</span></div>
+                <div class="preview"><img src="入睡（晚上）.png" alt="入睡页·夜间模式"></div>
             </div>
             <div class="image-slot">
                 <div class="label">入睡页 · 白天模式</div>
-                <div class="preview"><span class="hint">☀️ 白天 — 庄园 + 睡眠规律</span></div>
+                <div class="preview"><img src="入睡（白天）.png" alt="入睡页·白天模式"></div>
             </div>
             <div class="image-slot">
                 <div class="label">发现页</div>
-                <div class="preview"><span class="hint">🔍 晚安声音 / 好梦故事 / 我的声音</span></div>
+                <div class="preview"><img src="发现页.png" alt="发现页"></div>
             </div>
             <div class="image-slot">
                 <div class="label">我的页</div>
-                <div class="preview"><span class="hint">👤 睡眠数据 · 闹钟 · 庄园 · 设置</span></div>
-            </div>
-            <div class="image-slot">
-                <div class="label">音频详情页</div>
-                <div class="preview"><span class="hint">🎵 全屏沉浸式播放器</span></div>
+                <div class="preview"><img src="我的.png" alt="我的页"></div>
             </div>
             <div class="image-slot">
                 <div class="label">早安卡片</div>
-                <div class="preview"><span class="hint">🌅 金句 · 天气 · 带伞提醒 · 庄园入口</span></div>
+                <div class="preview"><img src="早安卡片.png" alt="早安卡片"></div>
             </div>
         </div>
     </section>
