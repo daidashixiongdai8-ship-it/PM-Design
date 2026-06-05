@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI素材运营 · 作品集</title>
+<style>
+  :root {
+    --primary: #FF4757;
+    --primary-light: #FF6B81;
+    --accent: #FFA502;
+    --accent2: #2ED573;
+    --bg: #F8F9FA;
+    --card: #FFFFFF;
+    --text: #2F3542;
+    --text-light: #747D8C;
+    --border: #E8ECF0;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-hover: 0 8px 40px rgba(255,71,87,0.15);
+    --radius: 16px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+    color: #fff;
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,71,87,0.2);
+    border: 1px solid rgba(255,71,87,0.4);
+    color: #FF6B81;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--primary-light); }
+  .hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 560px;
+    margin: 0 auto 40px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: #fff;
+    display: block;
+  }
+  .stat-num em { color: var(--accent); font-style: normal; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.5); }
+
+  /* ===== NAV TABS ===== */
+  .nav-wrap {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-light);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .nav-tab:hover { color: var(--primary); }
+  .nav-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+  /* ===== CONTAINER ===== */
+  .container { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ===== SECTION HEADER ===== */
+  .section-header { margin-bottom: 32px; }
+  .section-header h2 {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .section-header p { color: var(--text-light); font-size: 14px; }
+  .section-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .tag-red { background: #FFF0F1; color: var(--primary); }
+  .tag-orange { background: #FFF8E7; color: #E67E22; }
+  .tag-green { background: #EAFAF1; color: #27AE60; }
+  .tag-blue { background: #EBF5FB; color: #2980B9; }
+  .tag-purple { background: #F4ECF7; color: #8E44AD; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 28px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    margin-bottom: 20px;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .card-title { font-size: 18px; font-weight: 700; color: var(--text); }
+  .card-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+  }
+  .kpi-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .kpi-item {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 90px;
+  }
+  .kpi-val { font-size: 18px; font-weight: 800; color: var(--primary); }
+  .kpi-label { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+
+  /* ===== SCRIPT TIMELINE ===== */
+  .timeline { position: relative; padding-left: 28px; margin-top: 16px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--primary), var(--accent));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 16px;
+    padding: 14px 18px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .tl-item:hover { border-left-color: var(--primary); }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -23px;
+    top: 18px;
+    width: 10px;
+    height: 10px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--primary);
+  }
+  .tl-time {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .tl-type {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(255,71,87,0.1);
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .tl-content { font-size: 14px; color: var(--text); line-height: 1.6; }
+  .tl-note { font-size: 12px; color: var(--text-light); margin-top: 6px; font-style: italic; }
+
+  /* ===== ANALYSIS CARDS ===== */
+  .analysis-data {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  @media(max-width: 600px) { .analysis-data { grid-template-columns: repeat(2, 1fr); } }
+  .data-box {
+    background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    text-align: center;
+  }
+  .data-val { font-size: 20px; font-weight: 900; color: var(--accent); }
+  .data-lbl { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+  .segment-list { list-style: none; }
+  .seg-item {
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 10px;
+    border-left: 4px solid var(--primary);
+    background: var(--bg);
+  }
+  .seg-name { font-size: 12px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .seg-content { font-size: 14px; color: var(--text); }
+  .seg-why { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+  .seg-why::before { content: '💡 '; }
+
+  .reuse-box {
+    background: linear-gradient(135deg, #EAFAF1, #D5F5E3);
+    border: 1px solid #A9DFBF;
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    margin-top: 16px;
+  }
+  .reuse-title { font-size: 13px; font-weight: 700; color: #27AE60; margin-bottom: 8px; }
+  .reuse-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .reuse-tag {
+    background: #fff;
+    border: 1px solid #A9DFBF;
+    color: #27AE60;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* ===== AB TEST ===== */
+  .ab-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .ab-table th {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  .ab-table th:first-child { border-radius: 8px 0 0 0; }
+  .ab-table th:last-child { border-radius: 0 8px 0 0; }
+  .ab-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .ab-table tr:last-child td { border-bottom: none; }
+  .ab-table tr:hover td { background: #FFF8F8; }
+  .ab-table .var-a { color: #2980B9; font-weight: 600; }
+  .ab-table .var-b { color: #8E44AD; font-weight: 600; }
+  .ab-table .var-c { color: #E67E22; font-weight: 600; }
+
+  .decision-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 24px;
+  }
+  .dt-node {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+  }
+  .dt-node:not(:last-child)::after {
+    content: '↓';
+    position: absolute;
+    left: 19px;
+    top: 48px;
+    font-size: 16px;
+    color: var(--primary);
+    font-weight: bold;
+  }
+  .dt-step {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 13px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .dt-body {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    flex: 1;
+    margin-bottom: 24px;
+    border-left: 3px solid var(--primary);
+  }
+  .dt-q { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .dt-branches { display: flex; gap: 12px; flex-wrap: wrap; }
+  .dt-yes {
+    background: #EAFAF1;
+    border: 1px solid #A9DFBF;
+    color: #27AE60;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .dt-yes::before { content: '✅ YES: '; }
+  .dt-no {
+    background: #FFF0F1;
+    border: 1px solid #FADBD8;
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .dt-no::before { content: '❌ NO: '; }
+
+  .data-sample {
+    overflow-x: auto;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .data-table th {
+    background: #F4F6F9;
+    color: var(--text-light);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    font-size: 13px;
+  }
+  .data-table .highlight { color: var(--primary); font-weight: 700; }
+  .data-table .win { background: #EAFAF1; }
+  .data-table .lose { background: #FFF8F8; }
+
+  /* ===== SOP ===== */
+  .sop-phases { display: flex; flex-direction: column; gap: 20px; }
+  .sop-phase {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .sop-phase-header {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+  }
+  .phase-num {
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .phase-title { font-size: 16px; font-weight: 700; }
+  .phase-meta { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+  .phase-arrow { margin-left: auto; font-size: 18px; transition: transform 0.3s; }
+  .sop-phase-body { padding: 20px 24px; }
+  .sop-step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .step-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content { flex: 1; }
+  .step-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .step-action { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+  .step-output {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 6px;
+    background: #FFF8E7;
+    border: 1px solid #FDEBD0;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #E67E22;
+    font-weight: 600;
+  }
+  .step-output::before { content: '📤 输出：'; }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .tool-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+  }
+  .tool-category { font-size: 12px; font-weight: 700; color: var(--text-light); margin-bottom: 8px; }
+  .tool-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tool-pill {
+    padding: 4px 10px;
+    background: var(--bg);
+    border-radius: 100px;
+    font-size: 12px;
+    color: var(--text);
+    border: 1px solid var(--border);
+    font-weight: 500;
+  }
+
+  .kpi-bench {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .bench-card {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: #fff;
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    text-align: center;
+  }
+  .bench-val { font-size: 22px; font-weight: 900; }
+  .bench-label { font-size: 12px; opacity: 0.8; margin-top: 4px; }
+
+  /* ===== CHECKLIST ===== */
+  .checklist { list-style: none; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-icon { color: var(--accent2); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #1a1a2e;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 32px 24px;
+    font-size: 13px;
+  }
+  footer strong { color: var(--primary-light); }
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width: 768px) {
+    .hero { padding: 60px 20px 48px; }
+    .hero-stats { gap: 28px; }
+    .container { padding: 32px 16px; }
+    .card { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🔥 AI素材运营 · 作品集</div>
+  <h1>用数据驱动的<span>AI素材生产</span><br>打造白牌爆款增长飞轮</h1>
+  <p class="hero-sub">覆盖「趋势监控 → 脚本创作 → AI生成 → 投放测试 → 数据复盘」全链路，构建可持续的素材跑量体系</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num"><em>3</em>款</span><div class="stat-label">差异化脚本风格</div></div>
+    <div class="stat"><span class="stat-num"><em>3</em>份</span><div class="stat-label">爆款视频拆解报告</div></div>
+    <div class="stat"><span class="stat-num"><em>5</em>个</span><div class="stat-label">AB测试维度</div></div>
+    <div class="stat"><span class="stat-num"><em>5</em>阶</span><div class="stat-label">完整SOP流程</div></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="switchTab('scripts', this)">📝 信息流脚本</div>
+    <div class="nav-tab" onclick="switchTab('analysis', this)">🔍 爆款拆解</div>
+    <div class="nav-tab" onclick="switchTab('abtest', this)">🧪 AB测试方案</div>
+    <div class="nav-tab" onclick="switchTab('sop', this)">📋 生产SOP</div>
+    <div class="nav-tab" onclick="switchTab('tools', this)">🛠️ 工具矩阵</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <!-- ===== SCRIPTS TAB ===== -->
+  <div id="scripts" class="section active">
+    <div class="section-header">
+      <span class="section-tag tag-red">📝 信息流广告脚本</span>
+      <h2>三种风格·全品类通用脚本模板</h2>
+      <p>痛点型 / 场景沉浸型 / 对比反转型，覆盖美妆、家居、服装三大核心品类</p>
+    </div>
+
+    <!-- Script 1 -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">S001 · 祛斑精华「痛点钩子型」口播脚本</div>
+          <div class="card-meta">
+            <span class="chip">💄 美妆护肤</span>
+            <span class="chip">🎵 抖音/快手</span>
+            <span class="chip">⏱ 30s</span>
+            <span class="chip">💬 真人口播</span>
+          </div>
+        </div>
+        <span class="section-tag tag-red">痛点-解决型</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-item"><div class="kpi-val">4%+</div><div class="kpi-label">目标CTR</div></div>
+        <div class="kpi-item"><div class="kpi-val">3%+</div><div class="kpi-label">目标CVR</div></div>
+        <div class="kpi-item"><div class="kpi-val">65%+</div><div class="kpi-label">完播率目标</div></div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-time">0 – 3s</div>
+          <div class="tl-type">⚡ 钩子层</div>
+          <div class="tl-content">【镜头特写脸部斑点】旁白：「脸上的斑，用了三年护肤品还是去不掉？」</div>
+          <div class="tl-note">强痛点引入，目标用户立刻停留</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">3 – 8s</div>
+          <div class="tl-type">❤️ 共鸣层</div>
+          <div class="tl-content">出镜人：「我也是，遮瑕膏每天敷，就是治标不治本」，随手展示暗沉妆容</div>
+          <div class="tl-note">真实感强，降低广告感</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">8 – 18s</div>
+          <div class="tl-type">🧪 产品层</div>
+          <div class="tl-content">【产品特写+成分字幕】「烟酰胺+377复配，直接作用黑色素通道」，边说边展示涂抹动作</div>
+          <div class="tl-note">成分可信度背书，专业感拉满</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">18 – 25s</div>
+          <div class="tl-type">📊 效果层</div>
+          <div class="tl-content">【前后对比图，左右分屏】「用了28天，你们对比一下」——明显提亮，斑点淡化</div>
+          <div class="tl-note">视觉冲击最强节点，完播率关键</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">25 – 30s</div>
+          <div class="tl-type">🛒 CTA层</div>
+          <div class="tl-content">【价格字幕弹出】「现在直播间首单5折，点左下角链接，发完就下架」</div>
+          <div class="tl-note">紧迫感+低价=高转化</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script 2 -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">S002 · 懒人收纳神器「场景沉浸型」无口播脚本</div>
+          <div class="card-meta">
+            <span class="chip">🏠 家居用品</span>
+            <span class="chip">📱 抖音/小红书</span>
+            <span class="chip">⏱ 15s</span>
+            <span class="chip">🔇 纯视觉+字幕</span>
+          </div>
+        </div>
+        <span class="section-tag tag-blue">场景沉浸型</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-item"><div class="kpi-val">5%+</div><div class="kpi-label">目标CTR</div></div>
+        <div class="kpi-item"><div class="kpi-val">2.5%+</div><div class="kpi-label">目标CVR</div></div>
+        <div class="kpi-item"><div class="kpi-val">75%+</div><div class="kpi-label">完播率目标</div></div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-time">0 – 2s</div>
+          <div class="tl-type">⚡ 场景钩子</div>
+          <div class="tl-content">【乱糟糟的抽屉特写，配音：凌乱的杂物声】字幕：「你家抽屉也是这样？」</div>
+          <div class="tl-note">0.5秒内完成共鸣触发</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2 – 8s</div>
+          <div class="tl-type">🎬 使用过程</div>
+          <div class="tl-content">【流畅手部操作：取收纳盒→分类放入→推入抽屉，BGM节奏感强】字幕：「只需3步，永远不乱了」</div>
+          <div class="tl-note">ASMR质感，沉浸感强，适合静音场景</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">8 – 12s</div>
+          <div class="tl-type">✨ 结果呈现</div>
+          <div class="tl-content">【整洁抽屉全貌，配满足感BGM】字幕：「强迫症已治愈 ✓」</div>
+          <div class="tl-note">情绪共鸣>产品功能，点赞收藏率高</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">12 – 15s</div>
+          <div class="tl-type">🛒 CTA</div>
+          <div class="tl-content">【产品360°展示+价格标签】字幕：「9.9起，评论区扣1领券」</div>
+          <div class="tl-note">互动设计拉高评论数，助推算法推流</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script 3 -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">S003 · 显瘦连衣裙「对比反转型」脚本</div>
+          <div class="card-meta">
+            <span class="chip">👗 女装</span>
+            <span class="chip">📱 抖音/快手</span>
+            <span class="chip">⏱ 20s</span>
+            <span class="chip">🔄 变装转场</span>
+          </div>
+        </div>
+        <span class="section-tag tag-purple">对比反转型</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-item"><div class="kpi-val">4.5%+</div><div class="kpi-label">目标CTR</div></div>
+        <div class="kpi-item"><div class="kpi-val">4%+</div><div class="kpi-label">目标CVR</div></div>
+        <div class="kpi-item"><div class="kpi-val">70%+</div><div class="kpi-label">完播率目标</div></div>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-time">0 – 3s</div>
+          <div class="tl-type">⚡ 反差钩子</div>
+          <div class="tl-content">出镜人穿普通宽松T恤：「我这身材，根本不敢穿裙子」——停顿2秒，表情失落</div>
+          <div class="tl-note">负面情绪开场，吸引同款身材用户</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">3 – 10s</div>
+          <div class="tl-type">🔄 转折爆点</div>
+          <div class="tl-content">【旋转特效变装】出镜人换上连衣裙：「但穿上这条之后...」——配上惊讶表情</div>
+          <div class="tl-note">变装特效是完播率核心，用户会等待"变身"</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">10 – 17s</div>
+          <div class="tl-type">🏷️ 产品细节</div>
+          <div class="tl-content">【360°展示，字幕标注】「收腰设计↑ 遮肚腩↑ A字裙摆↑ 显腿长↑」</div>
+          <div class="tl-note">功能点视觉化标注，决策信息密度高</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">17 – 20s</div>
+          <div class="tl-type">🛒 CTA</div>
+          <div class="tl-content">【镜头拉近：评分+销量】「23000人已入手，今天最后一批，左下角直接拍」</div>
+          <div class="tl-note">社会证明+稀缺性双重促单</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ANALYSIS TAB ===== -->
+  <div id="analysis" class="section">
+    <div class="section-header">
+      <span class="section-tag tag-orange">🔍 爆款视频拆解</span>
+      <h2>三个高流量案例深度拆解</h2>
+      <p>从结构、视觉、节奏、CTA四个维度解码爆款密码，提炼可复用的视觉模型</p>
+    </div>
+
+    <!-- Report 1: BUV -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">R001 · BUV小绿泥洗面奶 × 蔡徐坤代言</div>
+          <div class="card-meta">
+            <span class="chip">📱 抖音</span>
+            <span class="chip">💄 美妆护肤</span>
+            <span class="chip">🏷️ BUV笔薇</span>
+            <span class="chip">明星背书型</span>
+          </div>
+        </div>
+      </div>
+      <div class="analysis-data">
+        <div class="data-box"><div class="data-val">679.4万</div><div class="data-lbl">点赞</div></div>
+        <div class="data-box"><div class="data-val">10万+/日</div><div class="data-lbl">日销量</div></div>
+        <div class="data-box"><div class="data-val">100万+/日</div><div class="data-lbl">日销售额</div></div>
+        <div class="data-box"><div class="data-val">15-20%</div><div class="data-lbl">30天转化率</div></div>
+      </div>
+      <div style="margin-bottom:16px;padding:10px 14px;background:#FFF8E7;border-radius:8px;font-size:12px;color:#E67E22;">
+        📊 数据来源：<a href="https://www.chanmama.com/open/tiksaleRank.html" target="_blank" style="color:#E67E22;">蝉妈妈2026/06/02日榜 #3</a> · 36氪<a href="https://36kr.com/p/3705534783221896" target="_blank" style="color:#E67E22;">《2026抖音电商趋势》</a>
+      </div>
+      <div style="margin-bottom:16px;padding:10px 14px;background:#F0F4FF;border-radius:8px;font-size:12px;color:#3867D6;">
+        🔗 视频链接：<a href="https://www.douyin.com/video/7647255322406571270" target="_blank" style="color:#3867D6;">douyin.com/video/7647255322406571270</a>（679.4万赞，2026/06/04发布）
+      </div>
+      <ul class="segment-list">
+        <li class="seg-item">
+          <div class="seg-name">⚡ 钩子层（0-3s）</div>
+          <div class="seg-content">蔡徐坤出镜/配音+产品特写，黄金3秒完成「顶流背书→产品露出」双重锚定</div>
+          <div class="seg-why">顶流明星=天然完播率保障，粉丝+路人双重覆盖；代言人-产品-品牌视觉三角快速建立信任</div>
+        </li>
+        <li class="seg-item">
+          <div class="seg-name">📚 内容层（3-20s）</div>
+          <div class="seg-content">素人效果展示+控油/清洁毛孔等功能点快切，字幕：「控油细腻 毛孔清洁 黑头闭口」</div>
+          <div class="seg-why">白牌逻辑反哺品牌：明星吸引→素人说服，用「成分+功效」的理性说服替代空洞品牌口号</div>
+        </li>
+        <li class="seg-item">
+          <div class="seg-name">🎯 转化层（20-30s）</div>
+          <div class="seg-content">旗舰店引流+「蔡徐坤同款」话术+限时优惠，BUV官方号日更多条持续触达</div>
+          <div class="seg-why">已建立双重信任（明星+功效），此时转化阻力最小，品牌号日更形成复购正循环</div>
+        </li>
+      </ul>
+      <div class="reuse-box">
+        <div class="reuse-title">✅ 可复用元素</div>
+        <div class="reuse-tags">
+          <span class="reuse-tag">明星+素人双线叙事</span>
+          <span class="reuse-tag">功能点快切字幕</span>
+          <span class="reuse-tag">品牌账号日更矩阵</span>
+          <span class="reuse-tag">成分功效说服逻辑</span>
+        </div>
+        <div style="margin-top:10px;font-size:13px;color:#27AE60;">💡 复刻：白牌可替代明星为KOC矩阵（10-20个中小达人同步发布），结构完全复用</div>
+      </div>
+    </div>
+
+    <!-- Report 2: 蒂洛薇 -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">R002 · 蒂洛薇水散粉 · 白牌逆袭品类冠军</div>
+          <div class="card-meta">
+            <span class="chip">📱 抖音</span>
+            <span class="chip">💄 散粉/蜜粉</span>
+            <span class="chip">🏷️ 蒂洛薇</span>
+            <span class="chip">视觉种草型</span>
+          </div>
+        </div>
+      </div>
+      <div class="analysis-data">
+        <div class="data-box"><div class="data-val">254.5万</div><div class="data-lbl">点赞</div></div>
+        <div class="data-box"><div class="data-val">2278万</div><div class="data-lbl">年度销售额</div></div>
+        <div class="data-box"><div class="data-val">品类冠军</div><div class="data-lbl">蜜粉排名</div></div>
+        <div class="data-box"><div class="data-val">47%</div><div class="data-lbl">夜间成交占比</div></div>
+      </div>
+      <div style="margin-bottom:16px;padding:10px 14px;background:#FFF8E7;border-radius:8px;font-size:12px;color:#E67E22;">
+        📊 数据来源：<a href="https://www.sohu.com/a/863364210_122066675" target="_blank" style="color:#E67E22;">搜狐·星图数据2024</a> · 36氪<a href="https://36kr.com/p/3705534783221896" target="_blank" style="color:#E67E22;">《2026抖音电商趋势》</a>（厦门帮白牌标杆）
+      </div>
+      <div style="margin-bottom:16px;padding:10px 14px;background:#F0F4FF;border-radius:8px;font-size:12px;color:#3867D6;">
+        🔗 视频链接：<a href="https://www.douyin.com/video/7647396937053900086" target="_blank" style="color:#3867D6;">douyin.com/video/7647396937053900086</a>（254.5万赞，2026/06/04发布）
+      </div>
+      <ul class="segment-list">
+        <li class="seg-item">
+          <div class="seg-name">⚡ 钩子层（0-5s）</div>
+          <div class="seg-content">产品特写（星空压花设计）+ 粉质飘散慢动作，字幕：「轻薄不脱妆、自然水润又服帖」</div>
+          <div class="seg-why">不依赖明星，纯产品视觉力驱动；星空压花区隔传统国货浮雕风，一眼辨识</div>
+        </li>
+        <li class="seg-item">
+          <div class="seg-name">📚 种草层（5-25s）</div>
+          <div class="seg-content">上脸效果+持妆对比（出门前 vs 8小时后），定位「养肤型散粉」</div>
+          <div class="seg-why">「养肤型散粉」搜索量2024年暴涨300%，精准卡位；真实持妆对比解决用户最大痛点</div>
+        </li>
+        <li class="seg-item">
+          <div class="seg-name">🎯 转化层（25-35s）</div>
+          <div class="seg-content">80元价位标注+多色号展示，引导橱窗/直播间；22:00-24:00直播间「激情喊麦」成交占比47%</div>
+          <div class="seg-why">黄金价位降低决策门槛+夜间经济精准匹配冲动消费时段 = 高转化组合拳</div>
+        </li>
+      </ul>
+      <div class="reuse-box">
+        <div class="reuse-title">✅ 可复用元素 · 白牌起步公式</div>
+        <div class="reuse-tags">
+          <span class="reuse-tag">产品视觉差异化设计</span>
+          <span class="reuse-tag">真实持妆对比</span>
+          <span class="reuse-tag">80元黄金价位</span>
+          <span class="reuse-tag">种草+挑战赛+直播组合拳</span>
+        </div>
+        <div style="margin-top:10px;font-size:13px;color:#27AE60;">💡 复刻：视觉差异化 + 趋势关键词（"养肤型"）+ 80元价位 + 夜间直播 = 白牌起盘模板</div>
+      </div>
+    </div>
+
+    <!-- Report 3: AI爆款方法论 -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">R003 · AI素材爆款方法论 · 105条百万赞视频规律提炼</div>
+          <div class="card-meta">
+            <span class="chip">📱 抖音</span>
+            <span class="chip">🤖 AI视频</span>
+            <span class="chip">📊 新榜数据</span>
+            <span class="chip">研究方法论</span>
+          </div>
+        </div>
+      </div>
+      <div class="analysis-data">
+        <div class="data-box"><div class="data-val">105条</div><div class="data-lbl">百万赞AI视频</div></div>
+        <div class="data-box"><div class="data-val">1365万</div><div class="data-lbl">最高点赞</div></div>
+        <div class="data-box"><div class="data-val">2.3亿</div><div class="data-lbl">最高曝光</div></div>
+        <div class="data-box"><div class="data-val">60万/条</div><div class="data-lbl">最高商单报价</div></div>
+      </div>
+      <div style="margin-bottom:16px;padding:10px 14px;background:#FFF8E7;border-radius:8px;font-size:12px;color:#E67E22;">
+        📊 数据来源：<a href="https://36kr.com/p/3788978905029635" target="_blank" style="color:#E67E22;">36氪×新榜《扒了上百条AI爆款视频》</a>（2026.1.1-4.17，105条百万赞AI视频全量分析）
+      </div>
+      <div style="margin-bottom:16px;padding:14px;background:#F5F5FF;border-radius:8px;">
+        <div style="font-size:13px;color:#666;margin-bottom:8px;">📈 赛道分布：转场变装30%+ | 情感叙事25%+ | 视觉炫技20%+ | 怀旧共鸣15%+ | 其他10%</div>
+      </div>
+      <ul class="segment-list">
+        <li class="seg-item">
+          <div class="seg-name">🔑 规律一：情感 > 技术</div>
+          <div class="seg-content">数据最好的视频无一例外击中了情感共鸣。1365万赞的和平期盼视频、393万赞的留守儿童短片、百万赞的先烈致敬——没有一个是纯炫技</div>
+          <div class="seg-why">AI工具是手段，不是内容。白牌电商素材应优先解决真实痛点叙事，而非展示「AI有多厉害」</div>
+        </li>
+        <li class="seg-item">
+          <div class="seg-name">🔑 规律二：真人+AI > 纯AI</div>
+          <div class="seg-content">当前爆款率最高的模式：真人搞笑段子+AI增强结尾。典型案例侯绿萝用此法单条报价60万，合作蓝氏猫粮/舒肤佳</div>
+          <div class="seg-why">白牌最优方案：真人拍1条打底 → AI换装/换背景/换字幕 → 批量产出20条变体</div>
+        </li>
+        <li class="seg-item">
+          <div class="seg-name">🔑 规律三：降低门槛 ≠ 保证持续</div>
+          <div class="seg-content">粉丝仅2834的账号单条138万赞的极端案例，但多数萌新仅此一条爆款</div>
+          <div class="seg-why">AI素材SOP的核心价值：降低单条成本的同时，用方法论保证底线产出质量</div>
+        </li>
+        <li class="seg-item">
+          <div class="seg-name">🔑 规律四：变现仍需积累，流量≠变现</div>
+          <div class="seg-content">能接高价商单的（60万/35.8万/25万一条）全是有多年积累的成熟博主；纯AI新手爆款后难商业化</div>
+          <div class="seg-why">白牌核心公式：AI素材引流 → 品牌账号沉淀 → 复购变现闭环，而非追求单条爆款</div>
+        </li>
+      </ul>
+      <div class="reuse-box">
+        <div class="reuse-title">✅ 可复用方法论</div>
+        <div class="reuse-tags">
+          <span class="reuse-tag">情感叙事优先</span>
+          <span class="reuse-tag">真人+AI混合模式</span>
+          <span class="reuse-tag">20变体批量AB测试</span>
+          <span class="reuse-tag">素材成本→0</span>
+          <span class="reuse-tag">方法论保底线</span>
+        </div>
+        <div style="margin-top:10px;font-size:13px;color:#27AE60;">💡 白牌团队AI SOP：痛点库→3-5版AI脚本→真人1条打底→AI生成20条变体→批量AB测试→数据回收迭代</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== AB TEST TAB ===== -->
+  <div id="abtest" class="section">
+    <div class="section-header">
+      <span class="section-tag tag-green">🧪 AB测试方案</span>
+      <h2>5维度测试矩阵 + 数据决策树</h2>
+      <p>系统化的素材测试框架，确保每一分投放预算都产生有效数据反馈</p>
+    </div>
+
+    <!-- AB Table -->
+    <div class="card">
+      <div class="card-title" style="margin-bottom:20px;">📊 测试变量矩阵</div>
+      <div style="overflow-x:auto;">
+        <table class="ab-table">
+          <thead>
+            <tr>
+              <th>测试维度</th>
+              <th>变量 A</th>
+              <th>变量 B</th>
+              <th>变量 C</th>
+              <th>核心指标</th>
+              <th>周期</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>钩子类型</strong></td>
+              <td class="var-a">痛点提问型<br>「你是不是也...」</td>
+              <td class="var-b">数字冲击型<br>「用了28天斑淡70%」</td>
+              <td class="var-c">反差悬念型<br>「我以为这辈子不可能...」</td>
+              <td>前3s留存率/CTR</td>
+              <td>3天</td>
+            </tr>
+            <tr>
+              <td><strong>封面图样式</strong></td>
+              <td class="var-a">真人出镜<br>（大脸特写+表情）</td>
+              <td class="var-b">产品特写<br>（白底/场景）</td>
+              <td class="var-c">前后对比图<br>（左右分屏）</td>
+              <td>CTR点击率</td>
+              <td>2天</td>
+            </tr>
+            <tr>
+              <td><strong>视频时长</strong></td>
+              <td class="var-a">15s 极简型</td>
+              <td class="var-b">30s 标准型</td>
+              <td class="var-c">60s 深度种草型</td>
+              <td>完播率/CVR</td>
+              <td>3天</td>
+            </tr>
+            <tr>
+              <td><strong>BGM风格</strong></td>
+              <td class="var-a">流行热门BGM<br>（当周抖音榜）</td>
+              <td class="var-b">ASMR/无BGM<br>（强调产品声音）</td>
+              <td class="var-c">轻音乐<br>（治愈系）</td>
+              <td>完播率/分享率</td>
+              <td>3天</td>
+            </tr>
+            <tr>
+              <td><strong>CTA话术</strong></td>
+              <td class="var-a">紧迫型<br>「今天最后一批」</td>
+              <td class="var-b">互动型<br>「评论区扣1领券」</td>
+              <td class="var-c">权益型<br>「新用户立减30」</td>
+              <td>CVR/加购率</td>
+              <td>3天</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12px;color:var(--text-light);">* 每组最小样本量：≥5000展现量；日预算建议：50-100元/条</div>
+    </div>
+
+    <!-- Data Sample -->
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;">📈 数据追踪表（示例）</div>
+      <div class="data-sample">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>素材ID</th><th>维度</th><th>版本</th><th>展现量</th><th>点击量</th><th>CTR</th>
+              <th>转化量</th><th>CVR</th><th>完播率</th><th>ROI</th><th>结论</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="lose">
+              <td>M001</td><td>钩子类型</td><td>A-痛点型</td><td>8,200</td><td>328</td>
+              <td>4.0%</td><td>9</td><td>2.7%</td><td>64%</td><td>1.8</td><td>观察中</td>
+            </tr>
+            <tr class="win">
+              <td>M002</td><td>钩子类型</td><td>B-数字型</td><td>8,100</td>
+              <td class="highlight">405</td><td class="highlight">5.0%</td>
+              <td class="highlight">16</td><td class="highlight">4.0%</td>
+              <td class="highlight">71%</td><td class="highlight">2.9</td>
+              <td>🔥 跑量！</td>
+            </tr>
+            <tr class="lose">
+              <td>M003</td><td>钩子类型</td><td>C-反差型</td><td>7,900</td><td>277</td>
+              <td>3.5%</td><td>7</td><td>2.5%</td><td>59%</td><td>1.5</td><td>❌ 暂停</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Decision Tree -->
+    <div class="card">
+      <div class="card-title" style="margin-bottom:20px;">🌲 素材迭代决策树</div>
+      <div class="decision-tree">
+        <div class="dt-node">
+          <div class="dt-step">S1</div>
+          <div class="dt-body">
+            <div class="dt-q">CTR 是否 ≥ 3%？</div>
+            <div class="dt-branches">
+              <div class="dt-yes">进入 Step 2</div>
+              <div class="dt-no">优化封面/钩子，重新制作</div>
+            </div>
+          </div>
+        </div>
+        <div class="dt-node">
+          <div class="dt-step">S2</div>
+          <div class="dt-body">
+            <div class="dt-q">完播率是否 ≥ 60%？</div>
+            <div class="dt-branches">
+              <div class="dt-yes">进入 Step 3</div>
+              <div class="dt-no">缩短时长，优化节奏，卡点重剪</div>
+            </div>
+          </div>
+        </div>
+        <div class="dt-node">
+          <div class="dt-step">S3</div>
+          <div class="dt-body">
+            <div class="dt-q">CVR 是否 ≥ 2.5%？</div>
+            <div class="dt-branches">
+              <div class="dt-yes">判定为跑量素材，加大投放预算</div>
+              <div class="dt-no">优化CTA话术和落地页，重测C维度</div>
+            </div>
+          </div>
+        </div>
+        <div class="dt-node">
+          <div class="dt-step">S4</div>
+          <div class="dt-body">
+            <div class="dt-q">跑量素材 ROI ≥ 2.0？</div>
+            <div class="dt-branches">
+              <div class="dt-yes">提炼模板，批量复刻，录入素材库</div>
+              <div class="dt-no">控制成本，调整定向人群标签</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Iteration SOP -->
+    <div class="card">
+      <div class="card-title" style="margin-bottom:16px;">🔄 周期迭代节奏</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-time">D1 - D3</div><div class="tl-content">小预算（50-100元/条）跑流量，收集基础数据</div></div>
+        <div class="tl-item"><div class="tl-time">D4</div><div class="tl-content">数据复盘，按决策树筛选素材，停投淘汰组</div></div>
+        <div class="tl-item"><div class="tl-time">D5 - D7</div><div class="tl-content">跑量素材加投，同时上线下一批AB测试</div></div>
+        <div class="tl-item"><div class="tl-time">D8</div><div class="tl-content">将跑量素材提炼结构模板，指导下周制作方向</div></div>
+        <div class="tl-item"><div class="tl-time">每周循环</div><div class="tl-content">保持5-10条新素材入池，淘汰率约60-70%为正常状态</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SOP TAB ===== -->
+  <div id="sop" class="section">
+    <div class="section-header">
+      <span class="section-tag tag-blue">📋 AI素材生产SOP</span>
+      <h2>白牌电商 AI 素材生产标准操作流程</h2>
+      <p>覆盖「选题监控 → 脚本创作 → AI生成 → 质检上线 → 数据复盘」全链路五阶段</p>
+    </div>
+    <div class="sop-phases">
+
+      <!-- Phase 1 -->
+      <div class="sop-phase">
+        <div class="sop-phase-header">
+          <div class="phase-num">1</div>
+          <div>
+            <div class="phase-title">选题与趋势监控</div>
+            <div class="phase-meta">每日30分钟 · 素材运营负责</div>
+          </div>
+          <div class="phase-arrow">▼</div>
+        </div>
+        <div class="sop-phase-body">
+          <div class="sop-step">
+            <div class="step-icon">1</div>
+            <div class="step-content">
+              <div class="step-name">爆款监控</div>
+              <div class="step-action">每日早10点刷抖音/快手/小红书热榜，筛选同品类近48h点赞>5万的视频。工具：飞瓜数据 / 蝉妈妈</div>
+              <div class="step-output">今日趋势清单（5-10条）</div>
+            </div>
+          </div>
+          <div class="sop-step">
+            <div class="step-icon">2</div>
+            <div class="step-content">
+              <div class="step-name">拆解分析</div>
+              <div class="step-action">对选中视频按「钩子-内容-产品-CTA」四层结构完成拆解，填入拆解模板</div>
+              <div class="step-output">结构化拆解报告1份</div>
+            </div>
+          </div>
+          <div class="sop-step">
+            <div class="step-icon">3</div>
+            <div class="step-content">
+              <div class="step-name">选题决策</div>
+              <div class="step-action">与运营/投流确认本周主推SKU，结合趋势确定本周素材方向（3-5个主题）</div>
+              <div class="step-output">本周素材选题矩阵</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="sop-phase">
+        <div class="sop-phase-header">
+          <div class="phase-num">2</div>
+          <div>
+            <div class="phase-title">脚本创作</div>
+            <div class="phase-meta">每条素材30-60分钟 · 素材运营负责</div>
+          </div>
+          <div class="phase-arrow">▼</div>
+        </div>
+        <div class="sop-phase-body">
+          <div class="sop-step">
+            <div class="step-icon">1</div>
+            <div class="step-content">
+              <div class="step-name">套用脚本模板</div>
+              <div class="step-action">从脚本库选取匹配风格模板（痛点/场景/对比），填入本品卖点。标准结构：钩子(0-5s)→共鸣(5-10s)→产品(10-20s)→效果(20-25s)→CTA(25-30s)</div>
+              <div class="step-output">分镜脚本初稿</div>
+            </div>
+          </div>
+          <div class="sop-step">
+            <div class="step-icon">2</div>
+            <div class="step-content">
+              <div class="step-name">AI辅助优化</div>
+              <div class="step-action">将初稿输入AI工具优化话术，生成3个钩子变体用于AB测试。工具：豆包 / 通义千问 / ChatGPT</div>
+              <div class="step-output">脚本A/B/C三版</div>
+            </div>
+          </div>
+          <div class="sop-step">
+            <div class="step-icon">3</div>
+            <div class="step-content">
+              <div class="step-name">内部自审（三问）</div>
+              <div class="step-action">① 钩子是否有停留感？② 产品卖点是否清晰？③ CTA是否明确？三问全满足才进入生产</div>
+              <div class="step-output">确认脚本1份</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3 -->
+      <div class="sop-phase">
+        <div class="sop-phase-header">
+          <div class="phase-num">3</div>
+          <div>
+            <div class="phase-title">AI视频/图像生产</div>
+            <div class="phase-meta">每条素材1-3小时 · AI生产为主</div>
+          </div>
+          <div class="phase-arrow">▼</div>
+        </div>
+        <div class="sop-phase-body">
+          <div class="sop-step">
+            <div class="step-icon">1</div>
+            <div class="step-content">
+              <div class="step-name">AI素材生成</div>
+              <div class="step-action">场景类→即梦/Runway；产品类→通义万相；图片特效→即梦特效/PixVerse；AI模特/换装→AccImage</div>
+              <div class="step-output">原始素材片段（按分镜）</div>
+            </div>
+          </div>
+          <div class="sop-step">
+            <div class="step-icon">2</div>
+            <div class="step-content">
+              <div class="step-name">真实素材补充</div>
+              <div class="step-action">AI生成+真实拍摄混剪，建议比例 AI:真实 = 6:4。⚠️ 产品颜色/细节必须用真实拍摄，防止AI失真导致退货率飙升</div>
+              <div class="step-output">分类素材包</div>
+            </div>
+          </div>
+          <div class="sop-step">
+            <div class="step-icon">3</div>
+            <div class="step-content">
+              <div class="step-name">剪映合成</div>
+              <div class="step-action">导入素材，按脚本分镜组装，添加字幕/转场/BGM/特效。必用功能：一键字幕、卡点节奏、旋转变装转场</div>
+              <div class="step-output">初剪版本</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 4 -->
+      <div class="sop-phase">
+        <div class="sop-phase-header">
+          <div class="phase-num">4</div>
+          <div>
+            <div class="phase-title">质检与上线</div>
+            <div class="phase-meta">每条30分钟 · 素材运营+投流确认</div>
+          </div>
+          <div class="phase-arrow">▼</div>
+        </div>
+        <div class="sop-phase-body">
+          <ul class="checklist">
+            <li class="check-item"><span class="check-icon">✅</span> 前3秒有强钩子，无废话开场</li>
+            <li class="check-item"><span class="check-icon">✅</span> 字幕清晰，字号≥36，与背景对比度高</li>
+            <li class="check-item"><span class="check-icon">✅</span> BGM音量适中，不盖过人声</li>
+            <li class="check-item"><span class="check-icon">✅</span> 产品出镜≥3次，近景特写≥1次</li>
+            <li class="check-item"><span class="check-icon">✅</span> 价格/优惠信息出现在最后5秒</li>
+            <li class="check-item"><span class="check-icon">✅</span> 无违规词（绝对化用语/医疗声称等）</li>
+            <li class="check-item"><span class="check-icon">✅</span> 竖版9:16，分辨率≥1080P</li>
+            <li class="check-item"><span class="check-icon">✅</span> 时长符合平台最优区间（抖音15-30s，快手20-40s）</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Phase 5 -->
+      <div class="sop-phase">
+        <div class="sop-phase-header">
+          <div class="phase-num">5</div>
+          <div>
+            <div class="phase-title">数据复盘与迭代</div>
+            <div class="phase-meta">每3天复盘一次 · 形成闭环</div>
+          </div>
+          <div class="phase-arrow">▼</div>
+        </div>
+        <div class="sop-phase-body">
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:20px;">
+            <div class="kpi-item"><div class="kpi-val">≥3%</div><div class="kpi-label">CTR 及格线</div></div>
+            <div class="kpi-item"><div class="kpi-val">≥5%</div><div class="kpi-label">CTR 优秀线</div></div>
+            <div class="kpi-item"><div class="kpi-val">≥2.5%</div><div class="kpi-label">CVR 及格线</div></div>
+            <div class="kpi-item"><div class="kpi-val">≥60%</div><div class="kpi-label">完播率及格</div></div>
+            <div class="kpi-item"><div class="kpi-val">≥1.5</div><div class="kpi-label">ROI 继续跑</div></div>
+            <div class="kpi-item" style="border:2px solid var(--primary)"><div class="kpi-val">≥2.5</div><div class="kpi-label">ROI 加大投入</div></div>
+          </div>
+          <div style="background:linear-gradient(135deg,#EAFAF1,#D5F5E3);border:1px solid #A9DFBF;border-radius:8px;padding:16px;font-size:13px;color:#155724;">
+            <strong>🔄 闭环路径：</strong>爆款视频监控 → 脚本复刻 → AI批量生产 → AB测试投放 → 跑量素材提炼模板 → 反馈选品备货 → 再投放
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-bench">
+      <div class="bench-card"><div class="bench-val">10-15条/周</div><div class="bench-label">1人产能目标（AI辅助后）</div></div>
+      <div class="bench-card" style="background:linear-gradient(135deg,#E67E22,#F39C12)"><div class="bench-val">≥30%</div><div class="bench-label">跑量率目标</div></div>
+      <div class="bench-card" style="background:linear-gradient(135deg,#27AE60,#2ECC71)"><div class="bench-val">3天/轮</div><div class="bench-label">AB测试闭环周期</div></div>
+    </div>
+  </div>
+
+  <!-- ===== TOOLS TAB ===== -->
+  <div id="tools" class="section">
+    <div class="section-header">
+      <span class="section-tag tag-purple">🛠️ 工具矩阵</span>
+      <h2>AI素材生产全链路工具选型</h2>
+      <p>涵盖趋势监控、AI生成、剪辑合成、投放分析各环节，技术不要求顶尖，会用工具解决问题</p>
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-category">📊 趋势监控</div>
+        <div class="tool-list">
+          <span class="tool-pill">飞瓜数据</span>
+          <span class="tool-pill">蝉妈妈</span>
+          <span class="tool-pill">抖音热榜</span>
+          <span class="tool-pill">快手磁力榜</span>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">✍️ 脚本/文案AI</div>
+        <div class="tool-list">
+          <span class="tool-pill">豆包</span>
+          <span class="tool-pill">通义千问</span>
+          <span class="tool-pill">ChatGPT</span>
+          <span class="tool-pill">Kimi</span>
+        </div>
+      </div>
+      <div class="tool-card" style="border-color:var(--primary);border-width:2px;">
+        <div class="tool-category" style="color:var(--primary);">🎬 AI视频生成 ⭐核心</div>
+        <div class="tool-list">
+          <span class="tool-pill" style="background:#FFF0F1;border-color:var(--primary);color:var(--primary);">即梦AI</span>
+          <span class="tool-pill" style="background:#FFF0F1;border-color:var(--primary);color:var(--primary);">Runway Gen-3</span>
+          <span class="tool-pill">Pika 2.0</span>
+          <span class="tool-pill">PixVerse</span>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">🖼️ AI图像/产品图</div>
+        <div class="tool-list">
+          <span class="tool-pill">通义万相</span>
+          <span class="tool-pill">Midjourney</span>
+          <span class="tool-pill">Photoroom</span>
+          <span class="tool-pill">AccImage</span>
+        </div>
+      </div>
+      <div class="tool-card" style="border-color:#2980B9;border-width:2px;">
+        <div class="tool-category" style="color:#2980B9;">✂️ 剪辑合成 ⭐必备</div>
+        <div class="tool-list">
+          <span class="tool-pill" style="background:#EBF5FB;border-color:#2980B9;color:#2980B9;">剪映（主力）</span>
+          <span class="tool-pill">CapCut</span>
+          <span class="tool-pill">剪映专业版</span>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">📈 投放分析</div>
+        <div class="tool-list">
+          <span class="tool-pill">巨量云图</span>
+          <span class="tool-pill">磁力金牛</span>
+          <span class="tool-pill">飞瓜数据</span>
+        </div>
+      </div>
+      <div class="tool-card">
+        <div class="tool-category">🔍 合规检测</div>
+        <div class="tool-list">
+          <span class="tool-pill">句无忧</span>
+          <span class="tool-pill">人工复查</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <strong>AI素材运营作品集</strong> · 白牌电商「爆款素材生产体系」<br>
+  <span style="margin-top:8px;display:block;">脚本创作 · 爆款拆解 · AB测试 · SOP建设 · 数据驱动</span>
+</footer>
+
+<script>
+  function switchTab(id, el) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
