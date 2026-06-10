@@ -41,7 +41,7 @@ a { color: inherit; text-decoration: none; }
 /* ===== Hero ===== */
 .hero {
   position: relative;
-  padding: 96px 0 80px;
+  padding: 88px 0 72px;
   background:
     radial-gradient(circle at 1px 1px, rgba(168,134,77,0.10) 1px, transparent 0) 0 0/16px 16px,
     linear-gradient(180deg, #f5efe2 0%, #faf8f4 100%);
@@ -50,11 +50,9 @@ a { color: inherit; text-decoration: none; }
 .hero::after {
   content: "运";
   position: absolute;
-  right: -80px;
-  bottom: -120px;
+  right: -80px; bottom: -120px;
   font-family: var(--serif);
-  font-size: 420px;
-  line-height: 1;
+  font-size: 420px; line-height: 1;
   color: var(--gold-pale);
   opacity: 0.18;
   pointer-events: none;
@@ -64,35 +62,29 @@ a { color: inherit; text-decoration: none; }
 .hero-eyebrow {
   display: inline-block;
   font-family: var(--serif);
-  font-size: 14px;
-  letter-spacing: 0.3em;
+  font-size: 14px; letter-spacing: 0.3em;
   color: var(--gold-dark);
   border: 1px solid var(--border-gold);
   border-radius: 999px;
-  padding: 6px 16px;
-  margin-bottom: 24px;
+  padding: 6px 16px; margin-bottom: 24px;
 }
 .hero h1 {
   font-family: var(--serif);
-  font-size: 56px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--text);
+  font-size: 52px; font-weight: 700;
+  letter-spacing: 0.1em; color: var(--text);
   margin-bottom: 16px;
 }
-.hero h1 .sub { display: block; font-size: 22px; font-weight: 500; letter-spacing: 0.05em; color: var(--gold-dark); margin-top: 12px; }
+.hero h1 .sub { display: block; font-size: 21px; font-weight: 500; letter-spacing: 0.05em; color: var(--gold-dark); margin-top: 12px; }
 .hero p.lead { font-size: 17px; color: var(--text-body); max-width: 520px; margin-bottom: 32px; }
 .hero-meta { display: flex; flex-wrap: wrap; gap: 12px; }
 .chip {
-  font-size: 13px;
-  padding: 7px 16px;
-  border-radius: 999px;
+  font-size: 13px; padding: 7px 16px; border-radius: 999px;
   background: rgba(255,255,255,0.6);
   border: 1px solid var(--border-gold);
   color: var(--gold-dark);
 }
 .chip.dark { background: var(--bg-dark); color: #faf3eb; border-color: var(--bg-dark); }
-.hero-mascot { flex: none; width: 260px; text-align: center; }
+.hero-mascot { flex: none; width: 240px; text-align: center; }
 .hero-mascot img { width: 100%; filter: drop-shadow(0 24px 32px rgba(58,40,23,0.28)); animation: float 4s ease-in-out infinite; }
 @keyframes float { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-16px) rotate(3deg); } }
 
@@ -103,13 +95,13 @@ a { color: inherit; text-decoration: none; }
 .section-head .kicker { font-family: var(--serif); font-size: 13px; letter-spacing: 0.25em; color: var(--gold-dark); }
 .section-head h2 { font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--text); margin: 12px 0 8px; letter-spacing: 0.06em; }
 .section-head p { font-size: 15px; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
 /* ===== 功能卡片网格 ===== */
 .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .feature-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 28px;
+  border-radius: 20px; padding: 28px;
   box-shadow: 0 2px 6px rgba(58,40,23,0.06);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
@@ -118,175 +110,29 @@ a { color: inherit; text-decoration: none; }
 .feature-card h3 { font-family: var(--serif); font-size: 19px; color: var(--text); margin-bottom: 10px; }
 .feature-card p { font-size: 14px; color: var(--text-muted); }
 
-/* ===== 手机预览 ===== */
-.phones { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
-.phone-col { width: 300px; }
-.phone {
-  position: relative;
-  width: 300px;
-  height: 620px;
-  background: #1a1a1a;
-  border-radius: 44px;
-  padding: 12px;
-  box-shadow: 0 30px 60px rgba(58,40,23,0.22), inset 0 0 0 2px rgba(255,255,255,0.08);
-}
-.phone::before {
-  content: "";
-  position: absolute;
-  top: 14px; left: 50%; transform: translateX(-50%);
-  width: 120px; height: 26px;
-  background: #1a1a1a;
-  border-radius: 0 0 16px 16px;
-  z-index: 5;
-}
-.screen {
-  width: 100%; height: 100%;
+/* ===== 截图画廊（真实截图 · 竖向滚动 · 无外壳） ===== */
+.shots { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+.shot-col { width: 300px; max-width: 100%; }
+.shot-frame {
+  width: 100%;
+  height: 600px;
+  border-radius: 22px;
+  overflow-y: auto;
+  overflow-x: hidden;
   background: var(--bg);
-  border-radius: 34px;
-  overflow: hidden;
-  position: relative;
-  font-size: 13px;
+  border: 1px solid var(--border);
+  box-shadow: 0 18px 40px rgba(58,40,23,0.16);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-pale) transparent;
 }
-.screen-scroll { height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-.screen-scroll::-webkit-scrollbar { width: 0; display: none; }
-.phone-caption { text-align: center; margin-top: 20px; font-family: var(--serif); font-size: 15px; color: var(--text); }
-.phone-caption span { display: block; font-family: var(--sans); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-
-/* status bar */
-.statusbar { display: flex; justify-content: space-between; align-items: center; padding: 14px 22px 4px; font-size: 12px; font-weight: 600; color: var(--text); }
-.statusbar .right { letter-spacing: 1px; }
-/* ===== 屏内：首页 ===== */
-.m-nav { display: flex; align-items: center; justify-content: space-between; padding: 8px 20px 14px; }
-.m-nav .title { font-family: var(--serif); font-size: 24px; letter-spacing: 0.15em; color: var(--text); font-weight: 700; }
-.m-nav .bell { font-size: 17px; opacity: 0.55; }
-.fortune {
-  position: relative; margin: 0 16px 18px; padding: 18px; border-radius: 22px;
-  background-color: var(--bg-warm);
-  background-image: radial-gradient(circle at 1px 1px, rgba(168,134,77,0.10) 1px, transparent 0);
-  background-size: 14px 14px;
-  border: 1px solid var(--border); overflow: hidden;
-}
-.fortune .wm { position: absolute; right: -40px; bottom: -56px; font-family: var(--serif); font-size: 190px; line-height: 1; color: var(--gold-pale); opacity: 0.32; }
-.fortune .row { position: relative; display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-.fortune .lunar { font-family: var(--serif); font-size: 13px; color: #5a5550; }
-.fortune .solar { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
-.fortune .badge { padding: 5px 11px; border-radius: 6px; background: var(--red); color: #faf3eb; font-family: var(--serif); font-size: 13px; }
-.fortune .score-row { position: relative; display: flex; align-items: flex-end; gap: 10px; margin-bottom: 14px; }
-.fortune .score { font-family: var(--serif); font-size: 60px; line-height: 0.9; font-weight: 700; color: var(--red); }
-.fortune .score-lbl { font-size: 11px; color: var(--text-muted); padding-bottom: 10px; }
-.fortune .quote { position: relative; font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--text-body); margin-bottom: 16px; }
-.fortune .tags { position: relative; display: flex; flex-wrap: wrap; gap: 7px; }
-.fortune .tg { font-size: 11px; padding: 4px 11px; border-radius: 999px; background: rgba(255,255,255,0.6); border: 1px solid var(--border-gold); color: #6a5d4a; }
-.fortune .tg.ac { background: rgba(120,110,180,0.10); border-color: rgba(120,110,180,0.45); color: #5a4d8a; }
-
-.cta {
-  position: relative; display: flex; align-items: center; gap: 10px;
-  margin: 30px 16px 22px; padding: 14px 14px 14px 6px; border-radius: 16px;
-  background: var(--bg-dark); color: #faf3eb;
-}
-.cta-fig { position: relative; z-index: 2; margin-top: -48px; margin-bottom: -14px; flex: none; transform: rotate(-6deg); filter: drop-shadow(0 8px 10px rgba(0,0,0,0.45)); }
-.cta-fig img { width: 92px; display: block; }
-.cta-fig::after { content: ""; position: absolute; left: 50%; bottom: 4px; width: 64px; height: 14px; transform: translateX(-50%) rotate(6deg); background: radial-gradient(ellipse at center, rgba(212,165,116,0.45), rgba(212,165,116,0)); z-index: -1; }
-.cta-txt { flex: 1; }
-.cta-txt .t { font-family: var(--serif); font-size: 15px; }
-.cta-txt .s { font-size: 11px; opacity: 0.7; margin-top: 2px; }
-.cta .spark { font-size: 18px; color: var(--gold); }
-
-.m-section { padding: 0 16px; margin-bottom: 22px; }
-.m-section .hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-.m-section .hd .t { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--text); }
-.m-section .hd .more { font-size: 11px; color: var(--gold-dark); }
-.t-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 14px; box-shadow: 0 2px 6px rgba(58,40,23,0.06); }
-.t-top { display: flex; gap: 10px; margin-bottom: 10px; }
-.t-ava { width: 46px; height: 46px; border-radius: 50%; flex: none; background: linear-gradient(135deg,#d9c8a3,#b89968); }
-.t-name { font-family: var(--serif); font-size: 14px; color: #3a2817; }
-.t-meta { font-size: 11px; color: var(--gold-dark); margin-top: 3px; }
-.t-rate { color: var(--text); }
-.t-tags { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
-.t-tags span { font-size: 11px; padding: 2px 8px; border-radius: 5px; background: #f5ecde; color: var(--gold-dark); }
-.t-btn { text-align: center; border: 1px solid #3a2817; color: #3a2817; border-radius: 999px; padding: 7px 0; font-size: 13px; font-family: var(--serif); }
-.room-card { display: flex; gap: 10px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 10px; margin-bottom: 10px; box-shadow: 0 2px 6px rgba(58,40,23,0.06); }
-.room-cover { width: 64px; height: 64px; border-radius: 12px; flex: none; background: linear-gradient(135deg,#c9b48a,#8b6b4a); position: relative; }
-.room-live { position: absolute; bottom: 4px; left: 4px; font-size: 9px; background: rgba(168,58,58,0.92); color: #fdf6e9; padding: 1px 5px; border-radius: 4px; }
-.room-name { font-family: var(--serif); font-size: 14px; color: #3a2817; }
-.room-desc { font-size: 11px; color: var(--gold-dark); margin-top: 4px; }
-.room-listeners { font-size: 11px; color: var(--gold-dark); margin-top: 6px; }
-/* ===== 屏内：语音房 ===== */
-.rm-top { display: flex; align-items: center; justify-content: space-between; padding: 4px 20px 12px; }
-.rm-back { font-size: 22px; color: var(--text); font-weight: 300; }
-.rm-live { display: flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: #fff; border: 1px solid #ebe5d8; font-size: 11px; color: var(--text); }
-.rm-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
-.rm-live .tm { color: var(--text-muted); }
-.rm-share { font-size: 18px; color: #5a5550; }
-.rm-host { display: flex; align-items: center; gap: 12px; padding: 8px 20px; margin-bottom: 18px; }
-.rm-host-ava { width: 52px; height: 52px; border-radius: 50%; background: #fff; border: 2px solid var(--text); display: flex; align-items: center; justify-content: center; flex: none; box-shadow: 0 4px 10px rgba(58,40,23,0.08); overflow: hidden; }
-.rm-host-ava img { width: 40px; height: 40px; object-fit: cover; }
-.rm-host-d { flex: 1; }
-.rm-host-name { font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
-.rm-host-badge { padding: 2px 8px; border-radius: 4px; background: var(--text); color: #faf3eb; font-size: 9px; font-family: var(--sans); }
-.rm-host-listeners { font-size: 11px; color: #8a8580; margin-top: 4px; }
-.rm-follow { padding: 6px 14px; border-radius: 999px; background: var(--text); color: #faf3eb; font-size: 11px; flex: none; }
-.rm-topic { position: relative; margin: 0 20px 22px; padding: 16px; border-radius: 16px; background-color: var(--bg-warm); background-image: radial-gradient(circle at 1px 1px, rgba(168,134,77,0.10) 1px, transparent 0); background-size: 14px 14px; border: 1px solid var(--border); overflow: hidden; }
-.rm-topic .wm { position: absolute; right: -30px; bottom: -50px; font-family: var(--serif); font-size: 140px; line-height: 1; color: var(--gold-pale); opacity: 0.3; }
-.rm-topic .lbl { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; position: relative; }
-.rm-topic .txt { font-family: var(--serif); font-size: 15px; font-weight: 500; color: var(--text); position: relative; }
-.rm-mic-sec { padding: 0 20px; margin-bottom: 22px; }
-.rm-mic-lbl { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; display: block; }
-.rm-mic-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.rm-mic-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-.rm-mic-ava { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
-.rm-mic-ava.host { background: #fff; border: 2px solid var(--text); overflow: hidden; }
-.rm-mic-ava.host img { width: 40px; height: 40px; object-fit: cover; }
-.rm-mic-ring { position: absolute; inset: -4px; border-radius: 50%; border: 2px solid rgba(184,48,46,0.5); }
-.rm-mic-ava.guest { background: linear-gradient(135deg,#d9c8a3,#b89968); color: #fff; font-family: var(--serif); font-size: 17px; box-shadow: 0 2px 6px rgba(58,40,23,0.08); }
-.rm-mic-ava.empty { background: #fff; border: 1px dashed #d9d2c2; color: #c9bfae; font-size: 17px; }
-.rm-mic-role { font-size: 10px; }
-.rm-mic-role.host { color: var(--text); font-family: var(--serif); }
-.rm-mic-role.guest { color: #8a8580; }
-.rm-mic-role.empty { color: #b8aea0; }
-.rm-listeners { display: flex; align-items: center; gap: 8px; padding: 0 20px; margin-bottom: 12px; }
-.rm-faces { display: flex; }
-.rm-face { width: 24px; height: 24px; border-radius: 50%; background: #d9c8a3; border: 2px solid var(--bg); color: #fff; font-size: 10px; display: flex; align-items: center; justify-content: center; }
-.rm-listeners .tx { font-size: 11px; color: var(--text-muted); }
-.rm-chat { padding: 4px 20px; }
-.rm-line { margin-bottom: 9px; font-size: 13px; line-height: 1.6; }
-.rm-line .u { font-family: var(--serif); font-weight: 500; margin-right: 4px; }
-.rm-line .t { color: var(--text-body); }
-.rm-gift { display: inline-block; padding: 6px 12px; border-radius: 8px; background: #fff5e6; border: 1px solid #f0e0bd; color: var(--gold-dark); font-size: 11px; }
-.rm-bottom { display: flex; align-items: center; gap: 8px; padding: 12px 16px 22px; }
-.rm-input { flex: 1; padding: 9px 16px; border-radius: 999px; background: #fff; border: 1px solid #ebe5d8; color: var(--text-muted); font-size: 11px; }
-.rm-act { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--text); color: #faf3eb; font-size: 15px; flex: none; }
-.rm-act.gift { background: #fff; color: #b89968; border: 1px solid #ebe5d8; }
-.rm-act.heart { background: #fff; color: var(--red); border: 1px solid #ebe5d8; }
-
-/* ===== 屏内：聊天 ===== */
-.ch-top { display: flex; align-items: center; justify-content: space-between; padding: 4px 20px 12px; }
-.ch-back { font-size: 24px; color: var(--text); }
-.ch-title { display: flex; align-items: center; gap: 8px; }
-.ch-name { font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--text); }
-.ch-badge { padding: 2px 8px; border-radius: 4px; background: var(--text); color: #faf3eb; font-size: 9px; }
-.ch-more { font-size: 20px; color: #5a5550; letter-spacing: 2px; }
-.ch-hero { display: flex; flex-direction: column; align-items: center; padding: 12px 0 20px; position: relative; }
-.ch-glow { position: absolute; top: 6px; width: 100px; height: 100px; border-radius: 50%; background: rgba(168,134,77,0.22); filter: blur(26px); }
-.ch-fig { position: relative; z-index: 1; transform: rotate(-4deg); filter: drop-shadow(0 10px 20px rgba(58,40,23,0.18)); }
-.ch-fig img { width: 120px; }
-.ch-lbl-row { margin-top: 10px; display: flex; align-items: center; gap: 6px; }
-.ch-sparkle { font-size: 10px; color: #b89968; }
-.ch-lbl { font-size: 11px; color: #8a8580; letter-spacing: 0.2em; }
-.ch-msgs { padding: 0 20px; }
-.ch-row { display: flex; align-items: flex-end; margin-bottom: 14px; }
-.ch-row.lingxi { justify-content: flex-start; }
-.ch-row.user { justify-content: flex-end; }
-.ch-ava { width: 34px; height: 34px; flex: none; margin-right: 8px; }
-.ch-ava img { width: 100%; }
-.ch-bubble { padding: 11px 15px; border-radius: 16px; font-size: 13px; line-height: 1.7; max-width: 82%; }
-.ch-bubble.lingxi { background: #fff; color: var(--text); border: 1px solid #ebe5d8; border-bottom-left-radius: 4px; font-family: var(--serif); box-shadow: 0 2px 6px rgba(58,40,23,0.04); }
-.ch-bubble.user { background: var(--text); color: #faf3eb; border-bottom-right-radius: 4px; }
-.ch-dispatch { display: flex; justify-content: center; padding: 8px 0 12px; }
-.ch-dispatch span { padding: 8px 18px; border-radius: 999px; background: var(--bg-warm); color: var(--gold-dark); border: 1px solid var(--border); font-family: var(--serif); font-size: 11px; }
-.ch-mic { padding: 12px 20px 24px; display: flex; flex-direction: column; align-items: center; }
-.ch-mic-btn { width: 100%; padding: 14px 0; border-radius: 999px; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--text); color: #faf3eb; font-family: var(--serif); font-size: 15px; box-shadow: 0 6px 18px rgba(26,26,26,0.25); }
-.ch-mic-hint { font-size: 11px; color: var(--text-muted); margin-top: 10px; }
+.shot-frame::-webkit-scrollbar { width: 6px; }
+.shot-frame::-webkit-scrollbar-thumb { background: var(--gold-pale); border-radius: 3px; }
+.shot-frame::-webkit-scrollbar-track { background: transparent; }
+.shot-frame img { width: 100%; display: block; }
+.shot-caption { text-align: center; margin-top: 18px; font-family: var(--serif); font-size: 16px; color: var(--text); }
+.shot-caption span { display: block; font-family: var(--sans); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+.shots-hint { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 36px; }
 
 /* ===== 流程时间线 ===== */
 .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
@@ -310,7 +156,6 @@ a { color: inherit; text-decoration: none; }
   .feature-grid { grid-template-columns: 1fr; }
   .flow { grid-template-columns: 1fr 1fr; }
 }
-/* PLACEHOLDER_STYLES */
 </style>
 </head>
 <body>
@@ -377,142 +222,29 @@ a { color: inherit; text-decoration: none; }
   </div>
 </section>
 
-<!-- ===== 界面预览 ===== -->
+<!-- ===== 界面预览（真实截图） ===== -->
 <section class="section alt">
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">界 面 预 览</span>
       <h2>三大核心页面</h2>
-      <p>以下为按真实小程序界面 1:1 还原的高保真预览。</p>
+      <p>以下为小程序真机运行截图，可在各画框内上下滚动查看完整页面。</p>
     </div>
-    <div class="phones">
-
-      <!-- 首页 -->
-      <div class="phone-col">
-        <div class="phone"><div class="screen"><div class="screen-scroll">
-          <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
-          <div class="m-nav"><span class="title">灵 犀</span><span class="bell">🔔</span></div>
-          <div class="fortune">
-            <span class="wm">运</span>
-            <div class="row">
-              <div><div class="lunar">丙午年 · 甲午月 · 丙午日</div><div class="solar">2026年3月14日 周六</div></div>
-              <span class="badge">宜 祈福</span>
-            </div>
-            <div class="score-row"><span class="score">88</span><span class="score-lbl">今日综合运势</span></div>
-            <div class="quote">「木火通明，宜主动出击，贵人多在午后。」</div>
-            <div class="tags">
-              <span class="tg ac">事业 ★★★★</span>
-              <span class="tg">财运 ★★★</span>
-              <span class="tg">感情 ★★★★</span>
-            </div>
-          </div>
-          <div class="cta">
-            <div class="cta-fig"><img src="assets/mascot.png" alt=""></div>
-            <div class="cta-txt"><div class="t">灵犀想和你聊聊今天</div><div class="s">点开和吉祥物语音对话</div></div>
-            <span class="spark">✦</span>
-          </div>
-          <div class="m-section">
-            <div class="hd"><span class="t">命理老师</span><span class="more">全部 ›</span></div>
-            <div class="t-card">
-              <div class="t-top">
-                <div class="t-ava"></div>
-                <div><div class="t-name">玄微子</div><div class="t-meta">紫微斗数 · 12年经验</div><div class="t-rate">★ 4.98</div></div>
-              </div>
-              <div class="t-tags"><span>事业</span><span>姻缘</span><span>流年</span></div>
-              <div class="t-btn">预约咨询</div>
-            </div>
-          </div>
-          <div class="m-section">
-            <div class="hd"><span class="t">语音房</span><span class="more">全部 ›</span></div>
-            <div class="room-card">
-              <div class="room-cover"><span class="room-live">LIVE</span></div>
-              <div><div class="room-name">今日运势解读</div><div class="room-desc">主播 灵犀 · 丙午日木火通明</div><div class="room-listeners">👥 328 人在听</div></div>
-            </div>
-          </div>
-          <div style="height:16px;"></div>
-        </div></div></div>
-        <div class="phone-caption">首页 · 每日运势<span>运势评分 / 命理师 / 语音房入口</span></div>
+    <div class="shots">
+      <div class="shot-col">
+        <div class="shot-frame"><img src="assets/shot-home.jpg" alt="灵犀首页截图"></div>
+        <div class="shot-caption">首页 · 每日运势<span>运势评分 / 命理师 / 语音房入口</span></div>
       </div>
-
-      <!-- 语音房 -->
-      <div class="phone-col">
-        <div class="phone"><div class="screen"><div class="screen-scroll">
-          <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
-          <div class="rm-top">
-            <span class="rm-back">˅</span>
-            <span class="rm-live"><span class="rm-dot"></span>直播中<span class="tm">· 01:24:38</span></span>
-            <span class="rm-share">↗</span>
-          </div>
-          <div class="rm-host">
-            <div class="rm-host-ava"><img src="assets/mascot-avatar.png" alt=""></div>
-            <div class="rm-host-d">
-              <div class="rm-host-name">灵犀 <span class="rm-host-badge">官方主播</span></div>
-              <div class="rm-host-listeners">👥 328 人在听</div>
-            </div>
-            <span class="rm-follow">+ 关注</span>
-          </div>
-          <div class="rm-topic">
-            <span class="wm">题</span>
-            <span class="lbl">本场主题</span>
-            <span class="txt">今日运势解读 · 丙午日木火通明</span>
-          </div>
-          <div class="rm-mic-sec">
-            <span class="rm-mic-lbl">麦位 · 1 / 8</span>
-            <div class="rm-mic-grid">
-              <div class="rm-mic-item"><div class="rm-mic-ava host"><img src="assets/mascot-avatar.png" alt=""><span class="rm-mic-ring"></span></div><span class="rm-mic-role host">主播</span></div>
-              <div class="rm-mic-item"><div class="rm-mic-ava guest">陈</div><span class="rm-mic-role guest">嘉宾</span></div>
-              <div class="rm-mic-item"><div class="rm-mic-ava empty">🎤</div><span class="rm-mic-role empty">空闲</span></div>
-              <div class="rm-mic-item"><div class="rm-mic-ava empty">🎤</div><span class="rm-mic-role empty">空闲</span></div>
-            </div>
-          </div>
-          <div class="rm-listeners">
-            <div class="rm-faces"><span class="rm-face">林</span><span class="rm-face" style="margin-left:-8px;">王</span><span class="rm-face" style="margin-left:-8px;">周</span></div>
-            <span class="tx">等 328 人正在围观</span>
-          </div>
-          <div class="rm-chat">
-            <div class="rm-line"><span class="u" style="color:#b8302e;">听风：</span><span class="t">老师今天财运怎么看？</span></div>
-            <div class="rm-line"><span class="u" style="color:#5a4d8a;">青衫：</span><span class="t">主题好应景，刚换工作。</span></div>
-            <div class="rm-gift">🎁 听风 送出了 锦囊 × 1</div>
-          </div>
-          <div class="rm-bottom">
-            <div class="rm-input">说点什么…</div>
-            <div class="rm-act">🎤</div>
-            <div class="rm-act gift">🎁</div>
-            <div class="rm-act heart">♥</div>
-          </div>
-        </div></div></div>
-        <div class="phone-caption">语音房 · 实时陪伴<span>麦位 / 围观 / 弹幕 / 送礼</span></div>
+      <div class="shot-col">
+        <div class="shot-frame"><img src="assets/shot-room.jpg" alt="灵犀语音房截图"></div>
+        <div class="shot-caption">语音房 · 实时陪伴<span>麦位 / 围观 / 弹幕 / 送礼</span></div>
       </div>
-
-      <!-- 聊天 -->
-      <div class="phone-col">
-        <div class="phone"><div class="screen"><div class="screen-scroll">
-          <div class="statusbar"><span>9:41</span><span class="right">●●●● 5G ▮</span></div>
-          <div class="ch-top">
-            <span class="ch-back">‹</span>
-            <span class="ch-title"><span class="ch-name">灵犀</span><span class="ch-badge">AI</span></span>
-            <span class="ch-more">···</span>
-          </div>
-          <div class="ch-hero">
-            <div class="ch-glow"></div>
-            <div class="ch-fig"><img src="assets/mascot.png" alt=""></div>
-            <div class="ch-lbl-row"><span class="ch-sparkle">✦</span><span class="ch-lbl">灵 犀 在 听</span></div>
-          </div>
-          <div class="ch-msgs">
-            <div class="ch-row lingxi"><span class="ch-ava"><img src="assets/mascot-avatar.png" alt=""></span><div class="ch-bubble lingxi">你好呀，我是灵犀。今天想聊聊运势，还是有什么心事？</div></div>
-            <div class="ch-row user"><div class="ch-bubble user">最近工作有点迷茫，想问问方向。</div></div>
-            <div class="ch-row lingxi"><span class="ch-ava"><img src="assets/mascot-avatar.png" alt=""></span><div class="ch-bubble lingxi">丙午日木火通明，正是动起来的时机。午后贵人运旺，不妨主动约人聊聊。</div></div>
-            <div class="ch-dispatch"><span>想找真人老师深入聊聊吗？ →</span></div>
-          </div>
-          <div class="ch-mic">
-            <div class="ch-mic-btn">🎤 按住说话</div>
-            <div class="ch-mic-hint">对话内容仅你与灵犀可见</div>
-          </div>
-        </div></div></div>
-        <div class="phone-caption">吉祥物对话 · AI 陪伴<span>语音输入 / 私密对话 / 派单引导</span></div>
+      <div class="shot-col">
+        <div class="shot-frame"><img src="assets/shot-chat.jpg" alt="灵犀吉祥物对话截图"></div>
+        <div class="shot-caption">吉祥物对话 · AI 陪伴<span>语音输入 / 私密对话 / 派单引导</span></div>
       </div>
-
     </div>
+    <p class="shots-hint">↑ 截图为真机运行画面，画框内可上下滚动</p>
   </div>
 </section>
 
